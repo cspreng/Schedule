@@ -27,8 +27,7 @@ public class ExcelService {
     public ExcelService(DataRepository dataRepository) {
         this.dataRepository = dataRepository;
     }
-    
-    @Scheduled(cron = "0 55 05 * * *") // Executes at 5:55 AM daily
+
     public void exportDataToExcel() {
         List<Clientes> clientesList = dataRepository.selectDate(LocalDate.now().minusDays(1));
 
