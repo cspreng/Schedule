@@ -1,10 +1,10 @@
 package com.teste.Agenda.service;
 
+import com.teste.Agenda.utils.MailConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -16,6 +16,9 @@ public class EmailSenderService {
 	
 	 @Autowired
 	    private JavaMailSender javaMailSender;
+
+	@Autowired
+	MailConstants mailConstants;
 
 	    public void sendMailWithAttachment(String toEmail,
 	                                       String body,
@@ -37,9 +40,9 @@ public class EmailSenderService {
 
 	    }
 	    
-	    @Scheduled(cron = "0 00 06 * * *") // Executes at 6:00 AM daily
+
 	    public void scheduleMailSending() throws MessagingException {
-	        String toEmail = "teste@gmail.com";
+	        String toEmail = mailConstants.RECIPIENT;
 	        String body = "Segue em anexo relatório diario de clientes.";
 	        String subject = "Relatório diario";
 	        String attachmentPath = "C:/Users/carlo/Desktop/Trampo/agendaApp/Agenda/clientes.xlsx"; // Update this with the actual attachment file path
